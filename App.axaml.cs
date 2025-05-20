@@ -62,10 +62,8 @@ public partial class App : Application
 
         services.AddSingleton<IAuthService, AuthService>();
         services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-        services.AddSingleton<NavigationService>();
-        services.AddSingleton<IScreensNavigationService>(sp => sp.GetRequiredService<NavigationService>());
-        services.AddSingleton<IPagesNavigationService>(sp => sp.GetRequiredService<NavigationService>());
-
+        services.AddSingleton<IScreensNavigationService, NavigationService>();
+        services.AddSingleton<IPagesNavigationService, NavigationService>();
         // ViewModels
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<LoginViewModel>();

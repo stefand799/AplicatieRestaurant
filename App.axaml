@@ -7,13 +7,14 @@
              xmlns:authVM="clr-namespace:AppRestaurant.ViewModels.Screens.Auth;assembly=AppRestaurant"
              xmlns:pagesVM="clr-namespace:AppRestaurant.ViewModels.Pages;assembly=AppRestaurant"
              xmlns:customer="clr-namespace:AppRestaurant.Views.Pages.Customer;assembly=AppRestaurant"
-             xmlns:pagesVM1="clr-namespace:AppRestaurant.ViewModels.Pages.Customer;assembly=AppRestaurant"
+             xmlns:customerVM="clr-namespace:AppRestaurant.ViewModels.Pages.Customer;assembly=AppRestaurant"
              xmlns:employee="clr-namespace:AppRestaurant.Views.Pages.Employee;assembly=AppRestaurant"
              xmlns:employeeVM="clr-namespace:AppRestaurant.ViewModels.Pages.Employee;assembly=AppRestaurant"
-             x:Class="AppRestaurant.App">
+             x:Class="AppRestaurant.App"
+             RequestedThemeVariant="Default">
 
+  <!-- Asociații ViewModel -> View pentru autentificare și ecrane principale -->
   <Application.DataTemplates>
-
     <!-- Auth Screens -->
     <DataTemplate DataType="authVM:LoginViewModel">
       <authScreens:LoginScreen />
@@ -22,7 +23,7 @@
       <authScreens:RegisterScreen />
     </DataTemplate>
 
-    <!-- Guest / Customer / Employee Screens -->
+    <!-- Main Screens -->
     <DataTemplate DataType="screensVM:GuestViewModel">
       <screens:GuestScreen />
     </DataTemplate>
@@ -37,11 +38,11 @@
     <DataTemplate DataType="pagesVM:MenuViewModel">
       <pages:MenuPage />
     </DataTemplate>
-    <DataTemplate DataType="pagesVM1:CustomerOrdersViewModel">
-      <customer:CustomerOrdersPage />
-    </DataTemplate>
-    <DataTemplate DataType="pagesVM1:CartViewModel">
+    <DataTemplate DataType="customerVM:CartViewModel">
       <customer:CartPage />
+    </DataTemplate>
+    <DataTemplate DataType="customerVM:CustomerOrdersViewModel">
+      <customer:CustomerOrdersPage />
     </DataTemplate>
 
     <!-- Employee Pages -->
@@ -66,12 +67,9 @@
     <DataTemplate DataType="employeeVM:LowStockViewModel">
       <employee:LowStockPage />
     </DataTemplate>
-
   </Application.DataTemplates>
 
   <Application.Styles>
-    <!-- Global styles or themes, ex.: -->
-    <!-- <FluentTheme Mode="Light"/> -->
+    <FluentTheme />
   </Application.Styles>
-
 </Application>

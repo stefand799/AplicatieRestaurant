@@ -1,54 +1,51 @@
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AppRestaurant.Services.Navigation;
-using AppRestaurant.ViewModels.Pages.Employee; // namespaces for page VMs: CategoriesViewModel, PreparationsViewModel, MenusViewModel, AllergensViewModel
+using AppRestaurant.ViewModels.Pages;
+using AppRestaurant.ViewModels.Pages.Employee;
 
 namespace AppRestaurant.ViewModels.Screens
 {
-    public partial class EmployeeViewModel : ViewModelBase
+    public partial class EmployeeViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private readonly IScreensNavigationService _screensNav;
         private readonly IPagesNavigationService _pagesNav;
+        private readonly IScreensNavigationService _screensNav;
 
         public EmployeeViewModel(
             IScreensNavigationService screensNav,
-            IPagesNavigationService pagesNav)
+            IPagesNavigationService   pagesNav)
         {
             _screensNav = screensNav;
-            _pagesNav = pagesNav;
+            _pagesNav   = pagesNav;
 
-            // La pornire, afișează lista de categorii în zona de pages
-            _pagesNav.Navigate<CategoriesViewModel>();
+            if (_pagesNav is INotifyPropertyChanged np)
+            {
+                np.PropertyChanged += (s, e) =>
+                {
+                    if (e.PropertyName == nameof(NavigationService.CurrentPageViewModel))
+                        OnPropertyChanged(nameof(CurrentPageViewModel));
+                };
+            }
+            _pagesNav.Navigate<MenuViewModel>();
         }
 
-        // Menu Management Section
-        [RelayCommand]
-        private void ShowCategoriesPage() => _pagesNav.Navigate<CategoriesViewModel>();
-        [RelayCommand]
-        private void ShowDishesPage() => _pagesNav.Navigate<DishesViewModel>();
-        [RelayCommand]
-        private void ShowMealsPage() => _pagesNav.Navigate<MealsViewModel>();
-        [RelayCommand]
-        private void ShowAllergensPage() => _pagesNav.Navigate<AllergensViewModel>();
+        public ViewModelBase CurrentPageViewModel 
+            => (_pagesNav as NavigationService).CurrentPageViewModel;
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        // Order Management Section
-        [RelayCommand]
-        private void ShowAllOrdersPage() => _pagesNav.Navigate<AllOrdersViewModel>();
-        [RelayCommand]
-        private void ShowActiveOrdersPage() => _pagesNav.Navigate<ActiveOrdersViewModel>();
+        [RelayCommand] private void ShowMenuPage()   => _pagesNav.Navigate<MenuViewModel>();
+        [RelayCommand] private void ShowActiveOrdersPage()   => _pagesNav.Navigate<ActiveOrdersViewModel>();
+        [RelayCommand] private void ShowAllergensPage()   => _pagesNav.Navigate<AllergensViewModel>();
+        [RelayCommand] private void ShowAllOrdersPage() => _pagesNav.Navigate<AllOrdersViewModel>();
+        [RelayCommand] private void ShowCategoriesPage() => _pagesNav.Navigate<CategoriesViewModel>();
+        [RelayCommand] private void ShowDishesPage() => _pagesNav.Navigate<DishesViewModel>();
+        [RelayCommand] private void ShowLowStockPage() => _pagesNav.Navigate<LowStockViewModel>();
+        [RelayCommand] private void ShowMealsPage() => _pagesNav.Navigate<MealsViewModel>();
 
-        // Inventory Management Section
-        [RelayCommand]
-        private void ShowLowStockPage() => _pagesNav.Navigate<LowStockViewModel>();
-
-        // Logout
-        [RelayCommand]
-        private void LogOut()
-        {
-            _screensNav.Navigate<GuestViewModel>();
-        }
-
-        // Expose PagesNav for binding
-        public IPagesNavigationService PagesNav => _pagesNav;
+        [RelayCommand] private void LogOut()=> _screensNav.Navigate<GuestViewModel>();
     }
 }

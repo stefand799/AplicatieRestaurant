@@ -72,10 +72,10 @@
         </StackPanel>
       </Border>
     </Popup>
-
+    
     <!-- Zona de pages, sub bara de navigatie -->
     <ContentControl Margin="0,50,0,0"
-                    Content="{Binding PagesNavigator.CurrentViewModel}"
+                    Content="{Binding CurrentPageViewModel}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"/>
   </Grid>

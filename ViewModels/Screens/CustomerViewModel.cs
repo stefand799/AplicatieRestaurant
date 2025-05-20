@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using AppRestaurant.Services.Navigation;
 using AppRestaurant.ViewModels.Pages;
@@ -5,45 +6,41 @@ using AppRestaurant.ViewModels.Pages.Customer;
 
 namespace AppRestaurant.ViewModels.Screens
 {
-    public partial class CustomerViewModel : ViewModelBase
+    public partial class CustomerViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private readonly IScreensNavigationService _screensNavigator;
-        private readonly IPagesNavigationService _pagesNavigator;
+        private readonly IPagesNavigationService _pagesNav;
+        private readonly IScreensNavigationService _screensNav;
 
         public CustomerViewModel(
-            IScreensNavigationService screensNavigator,
-            IPagesNavigationService pagesNavigator)
+            IScreensNavigationService screensNav,
+            IPagesNavigationService   pagesNav)
         {
-            _screensNavigator = screensNavigator;
-            _pagesNavigator = pagesNavigator;
+            _screensNav = screensNav;
+            _pagesNav   = pagesNav;
 
-            // La pornire, afișează pagina de meniu (MenuViewModel)
-            _pagesNavigator.Navigate<MenuViewModel>();
+            if (_pagesNav is INotifyPropertyChanged np)
+            {
+                np.PropertyChanged += (s, e) =>
+                {
+                    if (e.PropertyName == nameof(NavigationService.CurrentPageViewModel))
+                        OnPropertyChanged(nameof(CurrentPageViewModel));
+                };
+            }
+            _pagesNav.Navigate<MenuViewModel>();
         }
 
-        // Comenzi pentru navigarea între pagini în interiorul CustomerScreen
-        [RelayCommand]
-        private void ShowMenuPage() => _pagesNavigator.Navigate<MenuViewModel>();
+        public ViewModelBase CurrentPageViewModel 
+            => (_pagesNav as NavigationService).CurrentPageViewModel;
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        [RelayCommand]
-        private void ShowOrdersPage() => _pagesNavigator.Navigate<CustomerOrdersViewModel>();
+        [RelayCommand] private void ShowMenuPage()   => _pagesNav.Navigate<MenuViewModel>();
+        [RelayCommand] private void ShowCartPage()   => _pagesNav.Navigate<CartViewModel>();
+        [RelayCommand] private void ShowOrdersPage() => _pagesNav.Navigate<CustomerOrdersViewModel>();
 
-        [RelayCommand]
-        private void ShowCartPage() => _pagesNavigator.Navigate<CartViewModel>();
-
-        // // Comenzi pentru navigare între screens (dacă există)
-        // // de exemplu un profil, dacă este un screen separat
-        // [RelayCommand]
-        // private void NavigateToProfileScreen() => _screensNav.Navigate<ProfileViewModel>();
-
-        [RelayCommand]
-        private void LogOut()
-        {
-            // navighează înapoi la GuestScreen
-            _screensNavigator.Navigate<GuestViewModel>();
-        }
-
-        // Exponi serviciul de pagini pentru binding în XAML
-        public IPagesNavigationService PagesNavigator => _pagesNavigator;
+        [RelayCommand] private void LogOut()=> _screensNav.Navigate<GuestViewModel>();
     }
+
 }

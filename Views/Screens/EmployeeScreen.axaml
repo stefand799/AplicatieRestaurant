@@ -9,8 +9,8 @@
              x:DataType="vm:EmployeeViewModel">
 
   <Grid>
-    <!-- Main navigation bar -->
-    <Border Background="#3366CC" Height="50" VerticalAlignment="Top">
+        <!-- Main navigation bar -->
+    <Border Background="#FF8C00" Height="50" VerticalAlignment="Top">
       <ToggleButton Name="NavToggleButton"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
@@ -19,7 +19,7 @@
         <StackPanel Orientation="Horizontal"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">
-          <TextBlock Text="Employee Dashboard"
+          <TextBlock Text="Restaurant App"
                      FontSize="20"
                      FontWeight="Bold"
                      Foreground="White"
@@ -43,34 +43,69 @@
               BoxShadow="0 4 8 0 #20000000"
               Width="{Binding ElementName=NavToggleButton, Path=Bounds.Width}">
         <StackPanel Margin="10">
-          <!-- Menu Management -->
-          <TextBlock Text="Menu Management" FontWeight="Bold" Margin="0,5"/>
-          <Button Content="Categories" Command="{Binding ShowCategoriesPageCommand}" Margin="0,5"/>
-          <Button Content="Preparations/Dishes" Command="{Binding ShowDishesPageCommand}" Margin="0,5"/>
-          <Button Content="Menus" Command="{Binding ShowMealsPageCommand}" Margin="0,5"/>
-          <Button Content="Allergens" Command="{Binding ShowAllergensPageCommand}" Margin="0,5"/>
-          <Separator Margin="0,5"/>
+          <Button Content="Menu"
+                  Command="{Binding ShowMenuPageCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"/>
 
-          <!-- Order Management -->
-          <TextBlock Text="Order Management" FontWeight="Bold" Margin="0,5"/>
-          <Button Content="All Orders" Command="{Binding ShowAllOrdersPageCommand}" Margin="0,5"/>
-          <Button Content="Active Orders" Command="{Binding ShowActiveOrdersPageCommand}" Margin="0,5"/>
-          <Separator Margin="0,5"/>
+          <Button Content="Active Orders"
+                  Command="{Binding ShowActiveOrdersPageCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"/>
 
-          <!-- Inventory Management -->
-          <TextBlock Text="Inventory Management" FontWeight="Bold" Margin="0,5"/>
-          <Button Content="Low Stock Items" Command="{Binding ShowLowStockPageCommand}" Margin="0,5"/>
-          <Separator Margin="0,5"/>
+          <Button Content="All Orders"
+                  Command="{Binding ShowAllOrdersPageCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"/>
+          
+          <Button Content="Allergens"
+                  Command="{Binding ShowAllergensPageCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"/>
+          
+          <Button Content="Categories"
+                  Command="{Binding ShowCategoriesPageCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"/>
+          
+          <Button Content="Dishes"
+                  Command="{Binding ShowDishesPageCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"/>
+          
+          <Button Content="Low Stock"
+                  Command="{Binding ShowLowStockPageCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"/>
 
-          <!-- Logout -->
-          <Button Content="Logout" Command="{Binding LogOutCommand}" Margin="0,5" Foreground="Red"/>
+          <Button Content="Dishes"
+                  Command="{Binding ShowMealsPageCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"/>
+          
+          <Button Content="Logout"
+                  Command="{Binding LogOutCommand}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Left"
+                  Margin="0,5"
+                  Foreground="Red"/>
+
+          <Separator Margin="0,5"/>
         </StackPanel>
       </Border>
     </Popup>
 
     <!-- Content area, below navbar -->
     <ContentControl Margin="0,50,0,0"
-                    Content="{Binding PagesNav.CurrentViewModel}"
+                    Content="{Binding CurrentPageViewModel}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"/>
   </Grid>

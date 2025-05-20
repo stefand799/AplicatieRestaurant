@@ -63,7 +63,6 @@ namespace AppRestaurant.Services.Navigation
         public void NavigateScreen<TViewModel>() where TViewModel : ViewModelBase
         {
             CurrentScreenViewModel = _serviceProvider.GetRequiredService<TViewModel>();
-            CurrentPageViewModel = null;
         }
 
         /// <summary>
