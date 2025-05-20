@@ -1,6 +1,7 @@
-namespace AppRestaurant.ViewModels.Pages;
-
-public class MenuViewModel
+namespace AppRestaurant.ViewModels.Pages
 {
-    
+    public class MenuViewModel : ViewModelBase
+    {
+
+    }
 }

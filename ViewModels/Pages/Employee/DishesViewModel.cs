@@ -1,6 +1,6 @@
 namespace AppRestaurant.ViewModels.Pages.Employee;
 
-public class DishesViewModel
+public class DishesViewModel : ViewModelBase
 {
     
 }

@@ -1,6 +1,6 @@
 namespace AppRestaurant.ViewModels.Pages.Employee;
 
-public class LowStockViewModel
+public class LowStockViewModel : ViewModelBase
 {
     
 }

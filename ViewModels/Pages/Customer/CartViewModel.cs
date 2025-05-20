@@ -1,6 +1,7 @@
-namespace AppRestaurant.ViewModels.Pages.Customer;
-
-public class CartViewModel
+namespace AppRestaurant.ViewModels.Pages.Customer
 {
-    
+    public class CartViewModel : ViewModelBase
+    {
+
+    }
 }

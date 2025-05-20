@@ -2,12 +2,13 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace AppRestaurant.Views.Pages.Employee;
-
-public partial class MealsPage : UserControl
+namespace AppRestaurant.Views.Pages.Employee
 {
-    public MealsPage()
+    public partial class MealsPage : UserControl
     {
-        InitializeComponent();
+        public MealsPage()
+        {
+            InitializeComponent();
+        }
     }
 }

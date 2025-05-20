@@ -1,15 +1,77 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="AppRestaurant.App"
-             xmlns:local="using:AppRestaurant"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             xmlns:screens="clr-namespace:AppRestaurant.Views.Screens;assembly=AppRestaurant"
+             xmlns:authScreens="clr-namespace:AppRestaurant.Views.Screens.Auth;assembly=AppRestaurant"
+             xmlns:pages="clr-namespace:AppRestaurant.Views.Pages;assembly=AppRestaurant"
+             xmlns:screensVM="clr-namespace:AppRestaurant.ViewModels.Screens;assembly=AppRestaurant"
+             xmlns:authVM="clr-namespace:AppRestaurant.ViewModels.Screens.Auth;assembly=AppRestaurant"
+             xmlns:pagesVM="clr-namespace:AppRestaurant.ViewModels.Pages;assembly=AppRestaurant"
+             xmlns:customer="clr-namespace:AppRestaurant.Views.Pages.Customer;assembly=AppRestaurant"
+             xmlns:pagesVM1="clr-namespace:AppRestaurant.ViewModels.Pages.Customer;assembly=AppRestaurant"
+             xmlns:employee="clr-namespace:AppRestaurant.Views.Pages.Employee;assembly=AppRestaurant"
+             xmlns:employeeVM="clr-namespace:AppRestaurant.ViewModels.Pages.Employee;assembly=AppRestaurant"
+             x:Class="AppRestaurant.App">
 
-    <Application.DataTemplates>
-        <local:ViewLocator/>
-    </Application.DataTemplates>
-  
-    <Application.Styles>
-        <FluentTheme />
-    </Application.Styles>
+  <Application.DataTemplates>
+
+    <!-- Auth Screens -->
+    <DataTemplate DataType="authVM:LoginViewModel">
+      <authScreens:LoginScreen />
+    </DataTemplate>
+    <DataTemplate DataType="authVM:RegisterViewModel">
+      <authScreens:RegisterScreen />
+    </DataTemplate>
+
+    <!-- Guest / Customer / Employee Screens -->
+    <DataTemplate DataType="screensVM:GuestViewModel">
+      <screens:GuestScreen />
+    </DataTemplate>
+    <DataTemplate DataType="screensVM:CustomerViewModel">
+      <screens:CustomerScreen />
+    </DataTemplate>
+    <DataTemplate DataType="screensVM:EmployeeViewModel">
+      <screens:EmployeeScreen />
+    </DataTemplate>
+
+    <!-- Customer Pages -->
+    <DataTemplate DataType="pagesVM:MenuViewModel">
+      <pages:MenuPage />
+    </DataTemplate>
+    <DataTemplate DataType="pagesVM1:CustomerOrdersViewModel">
+      <customer:CustomerOrdersPage />
+    </DataTemplate>
+    <DataTemplate DataType="pagesVM1:CartViewModel">
+      <customer:CartPage />
+    </DataTemplate>
+
+    <!-- Employee Pages -->
+    <DataTemplate DataType="employeeVM:CategoriesViewModel">
+      <employee:CategoriesPage />
+    </DataTemplate>
+    <DataTemplate DataType="employeeVM:DishesViewModel">
+      <employee:DishesPage />
+    </DataTemplate>
+    <DataTemplate DataType="employeeVM:MealsViewModel">
+      <employee:MealsPage />
+    </DataTemplate>
+    <DataTemplate DataType="employeeVM:AllergensViewModel">
+      <employee:AllergensPage />
+    </DataTemplate>
+    <DataTemplate DataType="employeeVM:AllOrdersViewModel">
+      <employee:AllOrdersPage />
+    </DataTemplate>
+    <DataTemplate DataType="employeeVM:ActiveOrdersViewModel">
+      <employee:ActiveOrdersPage />
+    </DataTemplate>
+    <DataTemplate DataType="employeeVM:LowStockViewModel">
+      <employee:LowStockPage />
+    </DataTemplate>
+
+  </Application.DataTemplates>
+
+  <Application.Styles>
+    <!-- Global styles or themes, ex.: -->
+    <!-- <FluentTheme Mode="Light"/> -->
+  </Application.Styles>
+
 </Application>

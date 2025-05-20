@@ -1,6 +1,10 @@
-namespace AppRestaurant.Services.Navigation;
+using AppRestaurant.ViewModels;
 
-public interface IPagesNavigationService
+namespace AppRestaurant.Services.Navigation
 {
-    
+    public interface IPagesNavigationService
+    {
+        ViewModelBase CurrentViewModel { get; }
+        void Navigate<TViewModel>() where TViewModel : ViewModelBase;
+    }
 }
