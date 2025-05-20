@@ -15,7 +15,7 @@ namespace AppRestaurant.Services.Auth
         public AuthService(AppRestaurantDbContext context, IPasswordHasher<User> passwordHasher)
         {
             _context = context;
-            _passwordHasher = new PasswordHasher<User>();
+            _passwordHasher = passwordHasher;
         }
         
         public User CurrentUser => _currentUser;

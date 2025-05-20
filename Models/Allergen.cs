@@ -13,6 +13,6 @@ namespace AppRestaurant.Models
         [Required, MaxLength(50)]
         public string Name { get; set; }
         
-        public ICollection<Dish> Dishes { get; set; } =  new List<Dish>();
+        public virtual ICollection<Dish> Dishes { get; set; } =  new List<Dish>();
     }
 }

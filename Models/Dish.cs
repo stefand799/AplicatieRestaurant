@@ -29,7 +29,7 @@ namespace AppRestaurant.Models
         [Required]
         public bool Availability { get; set; }
         
-        [Required, MaxLength(500)]
+        [MaxLength(500)]
         public string ImagePath { get; set; }
         
         [ForeignKey("CategoryId")]

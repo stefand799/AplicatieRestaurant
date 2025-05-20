@@ -18,7 +18,7 @@ namespace AppRestaurant.Models
         public decimal BasePrice { get; set; }
         public decimal DiscountPrecentage { get; set; }
         
-        [Required, MaxLength(500)]
+        [MaxLength(500)]
         public string ImagePath { get; set; }
         
         [ForeignKey("CategoryId")]

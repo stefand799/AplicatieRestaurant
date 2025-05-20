@@ -48,7 +48,7 @@ namespace AppRestaurant.ViewModels.Screens.Auth
                     return;
                 }
 
-                if (user.Role.Equals("Employee", StringComparison.OrdinalIgnoreCase))
+                if (user.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
                 {
                     _screensNavigator.Navigate<EmployeeViewModel>();
                 }
